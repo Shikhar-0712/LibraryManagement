@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Report</title>
+</head>
+
+<body>
+    <h1>Monthly Report</h1>
+    <h2>User Information</h2>
+    <p><strong>Email:</strong> {{ email }}</p>
+    <h2>Books Issued</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Content</th>
+            <th>Author</th>
+            <th>Date Issued</th>
+        </tr>
+        {% for book in books_data %}
+        <tr>
+            <td>{{ book.id }}</td>
+            <td>{{ book.name }}</td>
+            <td>{{ book.content }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.date_issue }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Feedbacks</h2>
+    <ul>
+        {% for item in feed %}
+        {% if item.bid in books_data|map(attribute='id') %}
+        <li>Book ID: {{ item.bid }} - Feedback: {{ item.feedback }} - Rating: {{item.rating}}</li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+
+    <p>We are actively working on your feedback to improve your experience. Thank you for sharing your thoughts with us!
+    </p>
+
+</body>
+
+</html>
